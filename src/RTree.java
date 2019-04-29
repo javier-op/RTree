@@ -136,7 +136,7 @@ public class RTree {
     private double areaDifference(Rectangle r0, Rectangle r1) {
         return Math.abs(
                 (r0.x1 - r0.x0) * (r0.y1 - r0.y0) -
-                (r1.x1 - r1.x0) * (r1.y1 - r1.y0)
+                        (r1.x1 - r1.x0) * (r1.y1 - r1.y0)
         );
     }
 
