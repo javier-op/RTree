@@ -27,4 +27,4 @@ nodos/
 out/
 
 #intelliJ
-*.iml
+*.iws
