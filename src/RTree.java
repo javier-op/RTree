@@ -1,3 +1,5 @@
+import com.sun.org.apache.regexp.internal.RECompiler;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -217,8 +219,19 @@ public class RTree {
      * @return Retorna los dos nodos resultantes al realizar quadratic split.
      */
     private RNodeData[] quadraticSplit() {
-        RNodeData[] output = new RNodeData[]{};
-        return output;
+        Rectangle r1;
+        Rectangle r2;
+        Rectangle MBR;
+        for (int i = 0; i < node.size; i++) {
+            for(int j = 0; j < node.size; j++){
+                if(i!=j)
+                    r1 = node.children_rectangles.get(i);
+                    r2 = node.children_rectangles.get(j);
+                    MBR = extend(r1,r2);
+                if (/*rectangulo tiene mayor area inutil*/) {
+                }
+            }
+        }
     }
 
     // TODO crear los nuevos nodos usando los nodos en index0 e index1 de node como base
