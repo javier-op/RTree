@@ -149,10 +149,10 @@ public class RTree {
         saveNode(node);
 
         if(new_children[0].type == 'n') {
-            updateParentId(new_children[0].children_ids, new_children[0].id);
+            updateChildren(new_children[0].children_ids, new_children[0].id);
         }
         if(new_children[1].type == 'n') {
-            updateParentId(new_children[1].children_ids, new_children[1].id);
+            updateChildren(new_children[1].children_ids, new_children[1].id);
         }
         new_children[0] = null;
         new_children[1] = null;
@@ -239,20 +239,56 @@ public class RTree {
         node0.children_rectangles = new ArrayList<Rectangle>();
         node0.children_ids = new ArrayList<Long>();
         node0.index_in_parent = node.index_in_parent; // reutilizamos la posición tambien
+        node0.children_rectangles.add(node.children_rectangles.get(index0));
         RNodeData node1 = new RNodeData();
         node1.parent_id = node.parent_id; // se va a insertar en el mismo padre
         node1.id = next_id++; // este va a ser un archivo nuevo
         node1.size = 1;
         node1.children_rectangles = new ArrayList<Rectangle>();
         node1.children_ids = new ArrayList<Long>();
+        node1.children_rectangles.add(node.children_rectangles.get(index1));
         // en node1 la posición en el padre todavia no esta definida, se hace despues en split
-        Rectangle mbr0;
-        Rectangle mbr1;
+        Rectangle mbr0 = node.children_rectangles.get(index0);
+        Rectangle mbr1 = node.children_rectangles.get(index1);
+        Rectangle current;
         if(node.type == 'l') {
             node0.type = 'l';
             node1.type = 'l';
-        } else if(node.type == 'r') {
-
+            for(int i = 0; i < node.size; i++) {
+                if(i == index0 || i == index1) continue;
+                current = node.children_rectangles.get(i);
+                if(areaDifference(extend(mbr1, current), current) > areaDifference(extend(mbr0, current), current)){
+                    node0.children_rectangles.add(current);
+                    node0.size++;
+                    mbr0 = extend(mbr0, current);
+                } else {
+                    node1.children_rectangles.add(current);
+                    node1.size++;
+                    mbr1 = extend(mbr1, current);
+                }
+            }
+        } else if(node.type == 'n') {
+            node0.type = 'n';
+            node0.children_ids.add(node.children_ids.get(index0));
+            node1.type = 'n';
+            node1.children_ids.add(node.children_ids.get(index1));
+            long current_id;
+            for(int i = 0; i < node.size; i++) {
+                if(i == index0 || i == index1) continue;
+                current = node.children_rectangles.get(i);
+                current_id = node.children_ids.get(i);
+                if(areaDifference(extend(mbr1, current), current) > areaDifference(extend(mbr0, current), current)){
+                    node0.children_rectangles.add(current);
+                    node0.children_ids.add(current_id);
+                    node0.size++;
+                    mbr0 = extend(mbr0, current);
+                } else {
+                    node1.children_rectangles.add(current);
+                    node1.children_ids.add(current_id);
+                    node1.size++;
+                    mbr1 = extend(mbr1, current);
+                }
+            }
         }
         return new RNodeData[]{node0, node1};
     }
@@ -262,10 +298,11 @@ public class RTree {
      * @param children Lista con los nodos a los que se debe a actualizar el parent_id
      * @param new_parent_id El nuevo parent_id
      */
-    private void updateParentId(ArrayList<Long> children, long new_parent_id) {
-        for(Long id : children) {
-            loadNode(id);
+    private void updateChildren(ArrayList<Long> children, long new_parent_id) {
+        for(int i = 0; i < children.size(); i++) {
+            loadNode(children.get(i));
             node.parent_id = new_parent_id;
+            node.index_in_parent = i;
             saveNode(node);
         }
     }
