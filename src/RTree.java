@@ -154,6 +154,8 @@ public class RTree {
         if(new_children[1].type == 'n') {
             updateParentId(new_children[1].children_ids, new_children[1].id);
         }
+        new_children[0] = null;
+        new_children[1] = null;
 
         // si el nodo padre se pasa del tamaño maximo, llamo a split de nuevo
         if(node.size > max_size) {
@@ -231,9 +233,24 @@ public class RTree {
      */
     private RNodeData[] generateNewNodes(int index0, int index1) {
         RNodeData node0 = new RNodeData();
+        node0.parent_id = node.parent_id; // se va a insertar en el mismo padre
+        node0.id = node.id; // para este reutilizamos el archivo
+        node0.size = 1;
+        node0.children_rectangles = new ArrayList<Rectangle>();
+        node0.children_ids = new ArrayList<Long>();
+        node0.index_in_parent = node.index_in_parent; // reutilizamos la posición tambien
         RNodeData node1 = new RNodeData();
+        node1.parent_id = node.parent_id; // se va a insertar en el mismo padre
+        node1.id = next_id++; // este va a ser un archivo nuevo
+        node1.size = 1;
+        node1.children_rectangles = new ArrayList<Rectangle>();
+        node1.children_ids = new ArrayList<Long>();
+        // en node1 la posición en el padre todavia no esta definida, se hace despues en split
+        Rectangle mbr0;
+        Rectangle mbr1;
         if(node.type == 'l') {
-
+            node0.type = 'l';
+            node1.type = 'l';
         } else if(node.type == 'r') {
 
         }
