@@ -1,5 +1,3 @@
-import com.sun.org.apache.regexp.internal.RECompiler;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,8 +10,14 @@ public class RTree {
     private char mode;
     private ArrayList<Rectangle> search_result;
 
+    /**
+     * Constructor de RTree.
+     * @param dir_name Nombre del directorio que contiene los nodos.
+     * @param size Tamaño maximo de cada nodo.
+     * @param split_mode 0 indica linearSplit, 1 indica quadraticSplit.
+     */
     public RTree(String dir_name, int size, char split_mode) {
-        assert split_mode == 0 || split_mode == 1;
+        assert split_mode == 'l' || split_mode == 'q';
         dir = dir_name;
         root_id = 0L;
         next_id = 1L;
@@ -70,7 +74,8 @@ public class RTree {
                 split();
             } else {
                 saveNode(node);
-                updateMBR(node.parent_id, node.index_in_parent, value);
+                if(node.parent_id != null)
+                    updateMBR(node.parent_id, node.index_in_parent, value);
             }
         } else if (node.type == 'n') {
             int best_node_index = 0;
@@ -96,13 +101,12 @@ public class RTree {
      * @param extension Rectángulo que se insertó.
      */
     private void updateMBR(Long node_id, int rectangle_index, Rectangle extension) {
-        if(node_id != null) {
-            loadNode(node_id);
-            Rectangle new_rectangle = extend(node.children_rectangles.get(rectangle_index), extension);
-            node.children_rectangles.set(rectangle_index, new_rectangle);
-            saveNode(node);
+        loadNode(node_id);
+        Rectangle new_rectangle = extend(node.children_rectangles.get(rectangle_index), extension);
+        node.children_rectangles.set(rectangle_index, new_rectangle);
+        saveNode(node);
+        if(node.parent_id != null)
             updateMBR(node.parent_id, node.index_in_parent, extension);
-        }
     }
 
     /**
@@ -112,14 +116,14 @@ public class RTree {
     private void split() {
         RNodeData[] new_children; // new_children es un arreglo con los 2 nodos nuevos
 
-        if(mode == 0) { // se elige la heuristica para hacer el split
+        if(mode == 'l') { // se elige la heuristica para hacer el split
             new_children = linearSplit();
         } else {
             new_children = quadraticSplit();
         }
 
         if(node.parent_id == null) { // si el nodo es la raiz, creo una nueva raiz
-            node.size = 0;
+            node.size = 1;
             node.type = 'n';
             node.id = next_id++;
             node.index_in_parent = null;
@@ -128,6 +132,7 @@ public class RTree {
             node.children_ids = new ArrayList<Long>();
             node.children_ids.add(0L);
             new_children[0].index_in_parent = 0;
+            root_id = node.id;
         } else { // sino cargo al padre
             loadNode(node.parent_id);
         }
@@ -218,20 +223,10 @@ public class RTree {
      * Aplica quadratic split en el nodo cargado en node.
      * @return Retorna los dos nodos resultantes al realizar quadratic split.
      */
+
+
     private RNodeData[] quadraticSplit() {
-        Rectangle r1;
-        Rectangle r2;
-        Rectangle MBR;
-        for (int i = 0; i < node.size; i++) {
-            for(int j = 0; j < node.size; j++){
-                if(i!=j)
-                    r1 = node.children_rectangles.get(i);
-                    r2 = node.children_rectangles.get(j);
-                    MBR = extend(r1,r2);
-                if (/*rectangulo tiene mayor area inutil*/) {
-                }
-            }
-        }
+        return new RNodeData[]{};
     }
 
     // TODO crear los nuevos nodos usando los nodos en index0 e index1 de node como base
