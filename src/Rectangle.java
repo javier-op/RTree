@@ -12,4 +12,9 @@ public class Rectangle implements Serializable {
         this.y0 = y0;
         this.y1 = y1;
     }
+
+    public Double getArea(){
+        Double area = (this.x1-this.x0)*(this.y1-this.y0);
+        return area;
+    }
 }

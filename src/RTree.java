@@ -2,6 +2,7 @@ import com.sun.org.apache.regexp.internal.RECompiler;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RTree {
     private RNodeData node;
@@ -219,19 +220,31 @@ public class RTree {
      * @return Retorna los dos nodos resultantes al realizar quadratic split.
      */
     private RNodeData[] quadraticSplit() {
+        int[] par = {0, 0};
         Rectangle r1;
         Rectangle r2;
         Rectangle MBR;
+        Double area_mas_basura = 0.0;
+        Double area_basura = 0.0;
         for (int i = 0; i < node.size; i++) {
-            for(int j = 0; j < node.size; j++){
-                if(i!=j)
+            for (int j = 0; j < node.size; j++) {
+                if (i != j){
                     r1 = node.children_rectangles.get(i);
                     r2 = node.children_rectangles.get(j);
-                    MBR = extend(r1,r2);
-                if (/*rectangulo tiene mayor area inutil*/) {
+                    MBR = extend(r1, r2);
+                    if (intersect(r1, r2))
+                        area_basura = MBR.getArea() - (r1.getArea() + r2.getArea()) + areaInter(r1,r2);
+                    else
+                        area_basura = MBR.getArea() - (r1.getArea() + r2.getArea());
+                    if (area_basura > area_mas_basura) {
+                        area_mas_basura = area_basura;
+                        par[0] = i;
+                        par[1] = j;
+                    }
                 }
             }
         }
+        return generateNewNodes(par[0], par[1]);
     }
 
     // TODO crear los nuevos nodos usando los nodos en index0 e index1 de node como base
@@ -430,6 +443,20 @@ public class RTree {
                 (r0.x1 - r0.x0) * (r0.y1 - r0.y0) -
                         (r1.x1 - r1.x0) * (r1.y1 - r1.y0)
         );
+    }
+
+    /**
+     * Calcula el área intersectada por dos rectángulos.
+     * @param r0 Primer rectángulo.
+     * @param r1 Segundo rectángulo.
+     * @return Retorna el área de la interseccion.
+     */
+    private double areaInter(Rectangle r0, Rectangle r1) {
+        Double[] arrx = {r0.x0, r0.x1, r1.x0, r1.x1};
+        Arrays.sort(arrx);
+        Double[] arry = {r0.y0, r0.y1, r1.y0, r1.y1};
+        Arrays.sort(arry);
+        return (arrx[2]-arrx[1])*(arry[2]-arry[1]);
     }
 
     /**
