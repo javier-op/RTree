@@ -4,10 +4,10 @@ public class TesteoFeo {
 
 
     public static void main(String[] args) {
-        RTree arbolito = new RTree("nodos", 1000);
+        RTree arbolito = new RTree("nodos",5,'l');
 
 
-        for(double i=0.0;i<100;i++){
+        for(double i=0.0;i<15;i++){
             arbolito.insert(i,i+1, i, i+1);
 
         }
