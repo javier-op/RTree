@@ -108,6 +108,11 @@
             <path>
               <item name="RTree" type="b2602c69:ProjectViewProjectNode" />
               <item name="RTree" type="462c0819:PsiDirectoryNode" />
+              <item name="nodos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RTree" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RTree" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -172,6 +177,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32969433" />
