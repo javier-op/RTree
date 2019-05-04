@@ -7,22 +7,25 @@ public class RTree {
     private long root_id;
     private long next_id;
     private String dir;
-    private int max_size;
+    private int max_leaf_size;
+    private int max_node_size;
     private char mode;
     private ArrayList<Rectangle> search_result;
 
     /**
      * Constructor de RTree.
      * @param dir_name Nombre del directorio que contiene los nodos.
-     * @param size Tamaño maximo de cada nodo.
+     * @param leaf_size Tamaño maximo de cada hoja.
+     * @param node_size Tamaño maximo de cada nodo.
      * @param split_mode 0 indica linearSplit, 1 indica quadraticSplit.
      */
-    public RTree(String dir_name, int size, char split_mode) {
+    public RTree(String dir_name, int leaf_size, int node_size, char split_mode) {
         assert split_mode == 'l' || split_mode == 'q';
         dir = dir_name;
         root_id = 0L;
         next_id = 1L;
-        max_size = size;
+        max_leaf_size = leaf_size;
+        max_node_size = node_size;
         mode = split_mode;
         node = new RNodeData();
         node.id = root_id;
@@ -71,7 +74,7 @@ public class RTree {
         if(node.type == 'l') {
             node.children_rectangles.add(value);
             node.size++;
-            if(node.size > max_size) {
+            if(node.size > max_leaf_size) {
                 split();
             } else {
                 saveNode(node);
@@ -166,7 +169,7 @@ public class RTree {
         new_children[1] = null;
 
         // si el nodo padre se pasa del tamaño maximo, llamo a split de nuevo
-        if(node.size > max_size) {
+        if(node.size > max_node_size) {
             split();
         }
     }
@@ -284,8 +287,9 @@ public class RTree {
         Rectangle mbr0 = node.children_rectangles.get(index0);
         Rectangle mbr1 = node.children_rectangles.get(index1);
         Rectangle current;
-        int max_split_size = max_size / 10 * 6;
+        int max_split_size;
         if(node.type == 'l') {
+            max_split_size = max_leaf_size;
             node0.type = 'l';
             node1.type = 'l';
             for(int i = 0; i < node.size; i++) {
@@ -308,6 +312,7 @@ public class RTree {
                 }
             }
         } else if(node.type == 'n') {
+            max_split_size = max_node_size;
             node0.type = 'n';
             node0.children_ids.add(node.children_ids.get(index0));
             node1.type = 'n';
@@ -317,7 +322,15 @@ public class RTree {
                 if(i == index0 || i == index1) continue;
                 current = node.children_rectangles.get(i);
                 current_id = node.children_ids.get(i);
-                if(areaDifference(extend(mbr1, current), current) > areaDifference(extend(mbr0, current), current)){
+                if(node0.size >= max_split_size) {
+                    node1.children_rectangles.add(current);
+                    node1.children_ids.add(current_id);
+                    node1.size++;
+                } else if(node1.size >= max_split_size) {
+                    node0.children_rectangles.add(current);
+                    node0.children_ids.add(current_id);
+                    node0.size++;
+                } else if(areaDifference(extend(mbr1, current), current) > areaDifference(extend(mbr0, current), current)){
                     node0.children_rectangles.add(current);
                     node0.children_ids.add(current_id);
                     node0.size++;
