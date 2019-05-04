@@ -284,13 +284,20 @@ public class RTree {
         Rectangle mbr0 = node.children_rectangles.get(index0);
         Rectangle mbr1 = node.children_rectangles.get(index1);
         Rectangle current;
+        int max_split_size = max_size / 10 * 6;
         if(node.type == 'l') {
             node0.type = 'l';
             node1.type = 'l';
             for(int i = 0; i < node.size; i++) {
                 if(i == index0 || i == index1) continue;
                 current = node.children_rectangles.get(i);
-                if(areaDifference(extend(mbr1, current), current) > areaDifference(extend(mbr0, current), current)){
+                if(node0.size >= max_split_size) {
+                    node1.children_rectangles.add(current);
+                    node1.size++;
+                } else if(node1.size >= max_split_size) {
+                    node0.children_rectangles.add(current);
+                    node0.size++;
+                } else if(areaDifference(extend(mbr1, current), current) > areaDifference(extend(mbr0, current), current)){
                     node0.children_rectangles.add(current);
                     node0.size++;
                     mbr0 = extend(mbr0, current);
