@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class RTree {
     private RNodeData node;
@@ -497,5 +498,17 @@ public class RTree {
                 Math.min(r0.x0, r1.x0), Math.max(r0.x1, r1.x1),
                 Math.min(r0.y0, r1.y0), Math.max(r0.y1, r1.y1)
         );
+    }
+
+    public Rectangle rectangleGenerator(){
+        double leftLimit = 0D;
+        double rightLimit = 499900D;
+        double x0 = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+        double y0 = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+        leftLimit = 1D;
+        rightLimit = 100D;
+        double x1 = x0 + leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+        double y1 = y0 + leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+        return new Rectangle(x0, x1, y0, y1);
     }
 }

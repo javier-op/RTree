@@ -1,18 +1,19 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TesteoFeo {
 
-
     public static void main(String[] args) {
+
         RTree arbolito = new RTree("nodos",90,60, 'q');
 
-
+        long startTime = System.currentTimeMillis();
         for(double i=0.0;i<950;i++){
-            arbolito.insert(i,i+1, i, i+1);
-
+            Rectangle r = arbolito.rectangleGenerator();
+            arbolito.insert(r.x0, r.x1, r.y0, r.y1);
         }
-
-        ArrayList<Rectangle> results = arbolito.search(0,1, 0, 1);
+        long endTime = System.currentTimeMillis() - startTime;
+        ArrayList<Rectangle> results = arbolito.search(600,601, 600, 601);
 
         System.out.println(results.size());
         String template = "x0=%.2f, x1=%.2f, y0=%.2f, y1=%.2f\n";
@@ -31,5 +32,7 @@ public class TesteoFeo {
                 results.get(1).y0,
                 results.get(1).y1)
         );
+
+        System.out.println(endTime);
     }
 }
