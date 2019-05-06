@@ -5,7 +5,7 @@ import org.apache.commons.io.FileUtils;
 
 public class LinearTest {
 
-    private static void testN(long n, int iterations, String output_path) {
+    private static void testN(long n, int iterations, String output_path, char mode) {
         RTree tree;
         double a, b, c, d;
         Random generator = new Random();
@@ -22,7 +22,7 @@ public class LinearTest {
         int counter;
         for(int i = 0; i < iterations; i++) {
             System.out.println("Starting iteration " + i + ".");
-            tree = new RTree("nodos",90,60, 'l');
+            tree = new RTree("nodos",90,60, mode);
 
             counter = 0;
             System.out.println("Starting insertion test, iteration " + i + ".");
@@ -84,44 +84,49 @@ public class LinearTest {
             }
         }
         StringBuilder output = new StringBuilder();
+        output.append("insert_times\t");
         for(int i = 0; i < iterations; i++) {
             output.append(insert_times.get(i));
             if(i == iterations - 1) {
                 output.append("\n");
             } else {
-                output.append(" ");
+                output.append("\t");
             }
         }
+        output.append("total_sizes\t");
         for(int i = 0; i < iterations; i++) {
             output.append(total_sizes.get(i));
             if(i == iterations - 1) {
                 output.append("\n");
             } else {
-                output.append(" ");
+                output.append("\t");
             }
         }
+        output.append("number_of_files\t");
         for(int i = 0; i < iterations; i++) {
             output.append(numbers_of_files.get(i));
             if(i == iterations - 1) {
                 output.append("\n");
             } else {
-                output.append(" ");
+                output.append("\t");
             }
         }
+        output.append("node_size_av\t");
         for(int i = 0; i < iterations; i++) {
             output.append(node_size_averages.get(i));
             if(i == iterations - 1) {
                 output.append("\n");
             } else {
-                output.append(" ");
+                output.append("\t");
             }
         }
+        output.append("search_times\t");
         for(int i = 0; i < iterations; i++) {
             output.append(search_times.get(i));
             if(i == iterations - 1) {
                 output.append("\n");
             } else {
-                output.append(" ");
+                output.append("\t");
             }
         }
 
@@ -133,6 +138,19 @@ public class LinearTest {
     }
 
     public static void main(String[] args) {
-        testN(5000, 3, "output");
+        long n = 262144; //2**9
+        int iter = 1;
+        for(int i=0; i<9; i++) {
+            //if(i == 0) {
+            //    String file_name2 = "quadratic_" + n;
+            //    testN(n, iter, file_name2, 'q');
+            //}else {
+                String file_name = "lineal_" + n;
+                testN(n, iter, file_name, 'l');
+                String file_name2 = "quadratic_" + n;
+                testN(n, iter, file_name2, 'q');
+            //}
+            n *= 2;
+        }
     }
 }
