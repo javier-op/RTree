@@ -500,15 +500,4 @@ public class RTree {
         );
     }
 
-    public Rectangle rectangleGenerator(){
-        double leftLimit = 0D;
-        double rightLimit = 499900D;
-        double x0 = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
-        double y0 = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
-        leftLimit = 1D;
-        rightLimit = 100D;
-        double x1 = x0 + leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
-        double y1 = y0 + leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
-        return new Rectangle(x0, x1, y0, y1);
-    }
 }
