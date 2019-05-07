@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d27111fa-6c59-461e-a7aa-2d4aa519059f" name="Default Changelist" comment="" />
+    <list default="true" id="d27111fa-6c59-461e-a7aa-2d4aa519059f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/TesteoFeo2.java" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,10 +52,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/LinearTest.java">
+        <entry file="file://$PROJECT_DIR$/src/StatsGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1470">
-              <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+            <state relative-caret-position="30">
+              <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding>
                 <element signature="e#8358#8359#0" expanded="true" />
                 <element signature="e#8386#8387#0" expanded="true" />
@@ -93,8 +95,9 @@
         <option value="$PROJECT_DIR$/src/TesteoFeo2.java" />
         <option value="$PROJECT_DIR$/src/TesteoFeo.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/LinearTest.java" />
         <option value="$PROJECT_DIR$/src/RTree.java" />
+        <option value="$PROJECT_DIR$/src/LinearTest.java" />
+        <option value="$PROJECT_DIR$/src/StatsGenerator.java" />
       </list>
     </option>
   </component>
@@ -207,9 +210,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20245726" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20245726" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -328,10 +330,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LinearTest.java">
+    <entry file="file://$PROJECT_DIR$/src/StatsGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1470">
-          <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+        <state relative-caret-position="30">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
             <element signature="e#8358#8359#0" expanded="true" />
             <element signature="e#8386#8387#0" expanded="true" />
