@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d27111fa-6c59-461e-a7aa-2d4aa519059f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LinearTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinearTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TesteoFeo.java" beforeDir="false" />
-    </list>
+    <list default="true" id="d27111fa-6c59-461e-a7aa-2d4aa519059f" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,10 +17,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6885">
-              <caret line="501" selection-start-line="501" selection-end-line="501" />
+            <state relative-caret-position="6615">
+              <caret line="441" column="30" selection-start-line="441" selection-start-column="30" selection-end-line="441" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#16153#16159#0" expanded="true" />
+                <element signature="e#19828#19829#0" expanded="true" />
+                <element signature="e#19869#19870#0" expanded="true" />
+                <element signature="e#19992#19993#0" expanded="true" />
+                <element signature="e#20036#20037#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,12 +52,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LinearTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1635">
-              <caret line="160" column="48" lean-forward="true" selection-start-line="160" selection-start-column="48" selection-end-line="160" selection-end-column="48" />
+            <state relative-caret-position="-1470">
+              <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#825#836#0" expanded="true" />
-                <element signature="e#6624#6625#0" expanded="true" />
+                <element signature="e#8358#8359#0" expanded="true" />
+                <element signature="e#8386#8387#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,8 +93,8 @@
         <option value="$PROJECT_DIR$/src/TesteoFeo2.java" />
         <option value="$PROJECT_DIR$/src/TesteoFeo.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/RTree.java" />
         <option value="$PROJECT_DIR$/src/LinearTest.java" />
+        <option value="$PROJECT_DIR$/src/RTree.java" />
       </list>
     </option>
   </component>
@@ -158,9 +157,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.LinearTest">
-    <configuration name="LinearTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="LinearTest" />
+  <component name="RunManager" selected="Application.StatsGenerator">
+    <configuration name="StatsGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StatsGenerator" />
       <module name="RTree" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -182,7 +181,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LinearTest" />
+        <item itemvalue="Application.StatsGenerator" />
         <item itemvalue="Application.TesteoFeo" />
         <item itemvalue="Application.TesteoFeo2" />
       </list>
@@ -207,10 +206,10 @@
     <option name="totallyTimeSpent" value="29355000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="25" width="1309" height="743" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.202692" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20245726" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -218,7 +217,7 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32969433" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32930845" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4996041" weight="0.23289903" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3990228" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -275,18 +274,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/LinearTest.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/ISplitter.java" />
     <entry file="file://$PROJECT_DIR$/src/LinearSplitter.java" />
@@ -307,27 +294,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/output">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/output" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TesteoFeo.java" />
     <entry file="file://$PROJECT_DIR$/src/RNodeData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="28" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TesteoFeo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -340,22 +315,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6885">
-          <caret line="501" selection-start-line="501" selection-end-line="501" />
+        <state relative-caret-position="6615">
+          <caret line="441" column="30" selection-start-line="441" selection-start-column="30" selection-end-line="441" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#16153#16159#0" expanded="true" />
+            <element signature="e#19828#19829#0" expanded="true" />
+            <element signature="e#19869#19870#0" expanded="true" />
+            <element signature="e#19992#19993#0" expanded="true" />
+            <element signature="e#20036#20037#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LinearTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1635">
-          <caret line="160" column="48" lean-forward="true" selection-start-line="160" selection-start-column="48" selection-end-line="160" selection-end-column="48" />
+        <state relative-caret-position="-1470">
+          <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#825#836#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#8358#8359#0" expanded="true" />
+            <element signature="e#8386#8387#0" expanded="true" />
           </folding>
         </state>
       </provider>

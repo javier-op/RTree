@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import org.apache.commons.io.FileUtils;
 
-public class LinearTest {
+public class StatsGenerator {
 
     public static Rectangle rectangleGenerator(){
         double leftLimit = 0D;
