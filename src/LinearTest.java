@@ -39,6 +39,9 @@ public class LinearTest {
     }
 
     private static void testN(int n, int start_n) {
+        n = (int) Math.pow(2, n);
+        start_n = (int) Math.pow(2, start_n);
+
         ArrayList<Rectangle> insert_data = genN(n);
         ArrayList<Rectangle> search_data = genN(n / 10);
         RTree linear = new RTree("nodos_linear",90,60,'l');
@@ -46,7 +49,10 @@ public class LinearTest {
 
         ArrayList<Long> total_sizes = new ArrayList<>();
         ArrayList<Long> numbers_of_files = new ArrayList<>();
-        ArrayList<Long> array = new ArrayList<>();
+        ArrayList<Long> insert_time = new ArrayList<>();
+        ArrayList<Long> search_time = new ArrayList<>();
+        ArrayList<Long> insert_access = new ArrayList<>();
+        ArrayList<Long> search_access = new ArrayList<>();
         long start;
         long total_size;
         long number_of_files;
@@ -63,10 +69,29 @@ public class LinearTest {
                 counter += 10;
             }
             if(i == next - 1){
-                if(i == 511)
-                    array.add(System.currentTimeMillis() - start);
-                else
-                    array.add(System.currentTimeMillis() - start + array.get(array.size()-1));
+                if(i == 511) {
+                    insert_time.add(System.currentTimeMillis() - start);
+                    insert_access.add(linear.get_disk_access_counter());
+                }
+                else {
+                    insert_time.add(System.currentTimeMillis() - start + insert_time.get(insert_time.size() - 1));
+                    insert_access.add(linear.get_disk_access_counter() + insert_access.get(insert_access.size() - 1));
+                }
+                int n_search = next / 10;
+                int counter_search = 0;
+                System.out.println("Reached linear tree of size " + next + ", starting search.");
+                linear.reset_disk_access_counter();
+                start = System.currentTimeMillis();
+                for(int j = 0; j < n_search; j++) {
+                    if(j % (n_search / 10) == 0) {
+                        System.out.println(counter_search + "% of data searched in linear, for n = " + next + ".");
+                        counter_search += 10;
+                    }
+                    r = search_data.get(j);
+                    linear.search(r.x0, r.x1, r.y0, r.y1);
+                }
+                search_access.add(linear.get_disk_access_counter());
+                search_time.add(System.currentTimeMillis() - start);
                 directoryListing = dir.listFiles();
                 if (directoryListing != null) {
                     total_size = 0;
@@ -79,32 +104,58 @@ public class LinearTest {
                     numbers_of_files.add(number_of_files);
                 }
                 next *= 2;
+                linear.reset_disk_access_counter();
                 start = System.currentTimeMillis();
             }
             r = insert_data.get(i);
             linear.insert(r.x0, r.x1, r.y0, r.y1);
         }
-        createFile("insert_time_lineal", array);
-        createFile("total_size_lineal", total_sizes);
-        createFile("numberof_files_lineal", numbers_of_files);
+        createFile("insert_time_linear", insert_time);
+        createFile("total_size_linear", total_sizes);
+        createFile("numberof_files_linear", numbers_of_files);
+        createFile("search_time_linear", search_time);
+        createFile("insert_access_linear", insert_access);
+        createFile("search_access_linear", search_access);
 
-        array = new ArrayList<>();
+        insert_time = new ArrayList<>();
         total_sizes = new ArrayList<>();
         numbers_of_files = new ArrayList<>();
+        search_time = new ArrayList<>();
+        insert_access = new ArrayList<>();
+        search_access = new ArrayList<>();
         dir = new File("nodos_quad");
         next = start_n;
         counter = 0;
         start = System.currentTimeMillis();
         for(int i = 0; i < n; i++) {
             if(i % (n / 10) == 0) {
-                System.out.println(counter + "% of data inserted in quad.");
+                System.out.println(counter + "% of data inserted in quadratic.");
                 counter += 10;
             }
             if(i == next - 1){
-                if(i == 511)
-                    array.add(System.currentTimeMillis() - start);
-                else
-                    array.add(System.currentTimeMillis() - start + array.get(array.size()-1));
+                if(i == 511) {
+                    insert_time.add(System.currentTimeMillis() - start);
+                    insert_access.add(quad.get_disk_access_counter());
+                }
+                else {
+                    insert_time.add(System.currentTimeMillis() - start + insert_time.get(insert_time.size() - 1));
+                    insert_access.add(quad.get_disk_access_counter() + insert_access.get(insert_access.size() - 1));
+                }
+                int n_search = next / 10;
+                int counter_search = 0;
+                System.out.println("Reached quadratic tree of size " + next + ", starting search.");
+                quad.reset_disk_access_counter();
+                start = System.currentTimeMillis();
+                for(int j = 0; j < n_search; j++) {
+                    if(j % (n_search / 10) == 0) {
+                        System.out.println(counter_search + "% of data searched in quadratic, for n = " + next + ".");
+                        counter_search += 10;
+                    }
+                    r = search_data.get(j);
+                    quad.search(r.x0, r.x1, r.y0, r.y1);
+                }
+                search_access.add(quad.get_disk_access_counter());
+                search_time.add(System.currentTimeMillis() - start);
                 directoryListing = dir.listFiles();
                 if (directoryListing != null) {
                     total_size = 0;
@@ -117,50 +168,19 @@ public class LinearTest {
                     numbers_of_files.add(number_of_files);
                 }
                 next *= 2;
-                start= System.currentTimeMillis();
+                quad.reset_disk_access_counter();
+                start = System.currentTimeMillis();
             }
             r = insert_data.get(i);
             quad.insert(r.x0, r.x1, r.y0, r.y1);
         }
-        createFile("insert_time_quad", array);
+        createFile("insert_time_quad", insert_time);
         createFile("total_size_quad", total_sizes);
         createFile("numberof_files_quad", numbers_of_files);
+        createFile("search_time_quad", search_time);
+        createFile("insert_access_quad", insert_access);
+        createFile("search_access_quad", search_access);
 
-        array = new ArrayList<>();
-        next = start_n / 10;
-        start = System.currentTimeMillis();
-        counter = 0;
-        for(int i = 0; i < n / 10; i++) {
-            if(i % (n / 100) == 0) {
-                System.out.println(counter + "% of data searched in linear.");
-                counter += 10;
-            }
-            if(i == next - 1){
-                array.add(System.currentTimeMillis() - start);
-                next *= 2;
-            }
-            r = search_data.get(i);
-            linear.search(r.x0, r.x1, r.y0, r.y1);
-        }
-        createFile("search_time_lineal", array);
-
-        array = new ArrayList<>();
-        next = start_n / 10;
-        start = System.currentTimeMillis();
-        counter = 0;
-        for(int i = 0; i < n / 10; i++) {
-            if(i % (n / 100) == 0) {
-                System.out.println(counter + "% of data searched in quad.");
-                counter += 10;
-            }
-            if(i == next - 1){
-                array.add(System.currentTimeMillis() - start);
-                next *= 2;
-            }
-            r = search_data.get(i);
-            quad.search(r.x0, r.x1, r.y0, r.y1);
-        }
-        createFile("search_time_quad", array);
         dir = new File("nodos_linear");
         try {
             FileUtils.deleteDirectory(dir);
@@ -178,6 +198,6 @@ public class LinearTest {
     }
 
     public static void main(String[] args) {
-        testN(131072, 512);
+        testN(13, 9);
     }
 }

@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 public class RTree {
     private RNodeData node;
@@ -12,6 +11,7 @@ public class RTree {
     private int max_node_size;
     private char mode;
     private ArrayList<Rectangle> search_result;
+    private long disk_access_counter;
 
     /**
      * Constructor de RTree.
@@ -34,6 +34,7 @@ public class RTree {
         node.size = 0;
         node.children_rectangles = new ArrayList<>();
         node.children_ids = new ArrayList<>();
+        disk_access_counter = 0;
         String fileName = "n" + node.id + ".bin";
         File dir = new File(dir_name);
         if(!dir.exists()) {
@@ -420,6 +421,7 @@ public class RTree {
      * @param node_id Identificador del nodo.
      */
     private void loadNode(Long node_id) {
+        disk_access_counter++;
         String fileName = "n" + node_id + ".bin";
         try {
             FileInputStream fis = new FileInputStream(dir + "/" + fileName);
@@ -437,6 +439,7 @@ public class RTree {
      * @param a_node El nodo a guardar.
      */
     private void saveNode(RNodeData a_node) {
+        disk_access_counter++;
         String fileName = "n" + a_node.id + ".bin";
         try {
             FileOutputStream fos = new FileOutputStream(dir + "/" + fileName);
@@ -500,4 +503,12 @@ public class RTree {
         );
     }
 
+    public void reset_disk_access_counter() {
+        disk_access_counter = 0;
+    }
+
+
+    public long get_disk_access_counter() {
+        return disk_access_counter;
+    }
 }
